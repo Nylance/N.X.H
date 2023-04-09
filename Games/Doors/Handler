@@ -57,21 +57,8 @@ Section2:NewButton("Plamen6789 Hub [BIRTHDAY]", "Plamen6789 Hub", function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/BirthdayModeDOORS/main/BirthdayModeScript'))()
 end)
 
-Section2:NewButton("V.G Hub", "Loads V.G Hub", function()
-	local A = loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.G-Hub-Games-List"))()
-	getgenv().Get = setmetatable({},{
-		__index = function(A, B)
-			return game:GetService(B)
-		end}
-	)
-	for i, v in pairs(Games) do
-		if i == game.PlaceId then
-			loadstring(game:HttpGet(v))()
-		end
-	end
-	for i, v in pairs(Unknown) do
-		loadstring(game:HttpGet(v))()
-	end
+Section2:NewButton("Random DOORS Script", "Random DOORS script", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Doors"))()
 end)
 
 local Tab3 = Window:NewTab("The Rooms")
