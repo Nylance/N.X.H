@@ -113,7 +113,3 @@ local Button = SettingsTab:CreateButton({
 		Rayfield:Destroy()
 	end,
 })
-
-task.wait(3)
-
-Rayfield:Notify("N.X.H", "has successfully loaded", 9714833951)
