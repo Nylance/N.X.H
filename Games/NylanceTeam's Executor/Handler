@@ -1,18 +1,8 @@
-task.wait(0.2)
-
-ScriptVersion = "0.1.0"
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-	Title = "NylanceHub Version: "..ScriptVersion.." loaded!",
-	Text = "Nylance Utilities© 2020 - 2023",
-	Duration = 2
-})
-
-task.wait(0.1)
+task.wait(0.5)
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local Window = Library.CreateLib("Shadows Scripts HUB V2", "DarkTheme")
+local Window = Library.CreateLib("Nylance.Xey.Hub", "DarkTheme")
 
 local Tab = Window:NewTab("Home")
 
@@ -26,14 +16,19 @@ Section:NewButton("NukeVsCity", "Loads NukeVsCity Game Hub - Keyless", function(
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/TheALLHACKLoader/main/NukeLoader"))()
 end)
 
-local Tab2 = Window:NewTab("Player")
-
-local Section2 = Tab2:NewSection("Player Stuff")
-
-Section2:NewSlider("Speed", "Set you speed", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
-	game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = s
-end)
-
-Section2:NewSlider("Jumppower", "Set you Jumppower", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
-	game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = s
+Section:NewButton("V.G Hub", "Loads V.G Hub", function()
+	local A = loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.G-Hub-Games-List"))()
+	getgenv().Get = setmetatable({},{
+		__index = function(A, B)
+			return game:GetService(B)
+		end}
+	)
+	for i, v in pairs(Games) do
+		if i == game.PlaceId then
+			loadstring(game:HttpGet(v))()
+		end
+	end
+	for i, v in pairs(Unknown) do
+		loadstring(game:HttpGet(v))()
+	end
 end)
