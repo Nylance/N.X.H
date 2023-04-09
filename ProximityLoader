@@ -62,7 +62,7 @@ ScreenGui:Destroy()
 
 local queue_on_teleport = queue_on_teleport or syn and syn.queue_on_teleport [[
        repeat task.wait() until game:IsLoaded() task.wait(5) print("ServerHoped or rejoined")
-       loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/littlegui/main/V.G-Hubs-Source'))()]]
+       loadstring(game:HttpGet('https://raw.githubusercontent.com/Nylance/XenonCompService/main/ProximityLoader'))()]]
 
 for i, v in pairs(Games) do
 	if i == game.PlaceId then
