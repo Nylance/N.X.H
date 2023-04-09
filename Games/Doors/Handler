@@ -15,7 +15,7 @@ local Window = Rayfield:CreateWindow({
 	ConfigurationSaving = {
 		Enabled = true,
 		FolderName = "N.X.H",
-		FileName = "N.X.H."..game.PlaceId..".proximity-config"
+		FileName = "N.X.H.services-"..game.PlaceId..".proximity-config"
 	},
 	KeySystem = false, -- Set this to true to use their key system
 	KeySettings = {
