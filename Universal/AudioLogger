@@ -1,0 +1,342 @@
+local Players = game:GetService("Players")
+local MPS = game:GetService("MarketplaceService")
+local CG = game:GetService("CoreGui")
+
+local Print = printconsole or printoutput or print
+
+if getgenv().AudioSnatcher then
+	return
+end
+
+local Copystring = setclipboard or toclipboard or Synapse and Synapse.CopyString or Clipboard and Clipboard.set or nil
+
+local IDsOnly = true --// Setting this to false will disable ID logging.
+local HashesOnly = true --// Setting this to false will disable hash logging.
+local LogSelf = true --// Setting this to false will ignore your sounds completely.
+local LogRecent = false --// Setting this to true will make it so the logger won't log anything played by the same player more than once until they play a different audio.
+local IsActive = true --// Setting this to false will by default disable the logger.
+
+local HookedAudios = {}
+
+getgenv().Blacklisted = { -- Throw in the audio IDs/Hashes you don't want to snatch.
+	154482724,
+	1352366478,
+	281156569,
+	28166555,
+	169259022,
+	154965929,
+	147722098,
+	204139415,
+	169285411,
+	328964620,
+	256471452,
+	861978247,
+	175024455,
+	311319322,
+	142383762,
+	335069960,
+	181027147,
+	344936319,
+	142429556,
+	78496487,
+	344936269,
+	328964589,
+	311319345,
+	362709353,
+	219397110,
+	229409838,
+	156444949,
+	10722059,
+	"rbxasset://sounds/action_get_up.mp3",
+	"rbxasset://sounds/uuhhh.mp3",
+	"rbxasset://sounds/action_falling.mp3",
+	"rbxasset://sounds/action_jump.mp3",
+	"rbxasset://sounds/action_jump_land.mp3",
+	"rbxasset://sounds/impact_water.mp3",
+	"rbxasset://sounds/action_swim.mp3",
+	"rbxasset://sounds/action_footsteps_plastic.mp3",
+}
+
+local MostRecentAudio = {}
+
+getgenv().SpecialTools = { -- Enabling this will make it so it will only search for sounds inside a specific Instance with a name written down below.
+	Enabled = false,
+	Instances = {
+		"BoomBox",
+		"Boombox",
+		"Torso",
+	}
+}
+
+local function CompileList()
+	local List = {}
+	for I, V in next, HookedAudios do
+		if V then
+			table.insert(List, "{\n    SoundId: " .. V[1] .. "\n    Player: " .. V[2] .. "\n    Name: " .. V[3] .. "\n}")
+		end
+	end
+	
+	if #List > 0 then
+		return table.concat(List, "\n")
+	end
+	return nil
+end
+
+getgenv().AudioSnatcher = Instance.new("ScreenGui")
+AudioSnatcher.Name = "ACHERUS's Audio Snatcher"
+
+local Copy = Instance.new("TextButton")
+Copy.Name = "Copy"
+Copy.Size = UDim2.new(.13, 0, .07, 0)
+Copy.Position = UDim2.new(.04, 0, .84)
+Copy.Style = Enum.ButtonStyle.RobloxRoundDefaultButton
+Copy.TextScaled = true
+Copy.TextColor3 = Color3.fromRGB(255, 255, 255)
+Copy.TextStrokeTransparency = .75
+Copy.Text = "Copy Audios"
+Copy.ZIndex = 10
+Copy.Font = Enum.Font.SourceSansBold
+
+local Hashes = Instance.new("TextButton")
+Hashes.Name = "Hashes"
+Hashes.Size = UDim2.new(.13, 0, .07, 0)
+Hashes.Position = UDim2.new(.04, 0, .77)
+Hashes.Style = (not HashesOnly and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+Hashes.TextScaled = true
+Hashes.TextColor3 = Color3.fromRGB(255, 255, 255)
+Hashes.TextStrokeTransparency = .75
+Hashes.Text = "Hashes"
+Hashes.ZIndex = 10
+Hashes.Font = Enum.Font.SourceSansBold
+
+local IDs = Instance.new("TextButton")
+IDs.Name = "ID"
+IDs.Size = UDim2.new(.13, 0, .07, 0)
+IDs.Position = UDim2.new(.04, 0, .7)
+IDs.Style = (not IDsOnly and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+IDs.TextScaled = true
+IDs.TextColor3 = Color3.fromRGB(255, 255, 255)
+IDs.TextStrokeTransparency = .75
+IDs.Text = "ID"
+IDs.ZIndex = 10
+IDs.Font = Enum.Font.SourceSansBold
+
+local Self = Instance.new("TextButton")
+Self.Name = "Self"
+Self.Size = UDim2.new(.13, 0, .07, 0)
+Self.Position = UDim2.new(.17, 0, .7)
+Self.Style = (not LogSelf and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+Self.TextScaled = true
+Self.TextColor3 = Color3.fromRGB(255, 255, 255)
+Self.TextStrokeTransparency = .75
+Self.Text = "Log Self"
+Self.ZIndex = 10
+Self.Font = Enum.Font.SourceSansBold
+
+local Recent = Instance.new("TextButton")
+Recent.Name = "Recent"
+Recent.Size = UDim2.new(.13, 0, .07, 0)
+Recent.Position = UDim2.new(.17, 0, .77)
+Recent.Style = (not LogRecent and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+Recent.TextScaled = true
+Recent.TextColor3 = Color3.fromRGB(255, 255, 255)
+Recent.TextStrokeTransparency = .75
+Recent.Text = "Log Recent"
+Recent.ZIndex = 10
+Recent.Font = Enum.Font.SourceSansBold
+
+local Active = Instance.new("TextButton")
+Active.Name = "Active"
+Active.Size = UDim2.new(.13, 0, .07, 0)
+Active.Position = UDim2.new(.17, 0, .84)
+Active.Style = (not IsActive and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+Active.TextScaled = true
+Active.TextColor3 = Color3.fromRGB(255, 255, 255)
+Active.TextStrokeTransparency = .75
+Active.Text = "Active"
+Active.ZIndex = 10
+Active.Font = Enum.Font.SourceSansBold
+
+Copy.Parent = AudioSnatcher
+Hashes.Parent = AudioSnatcher
+IDs.Parent = AudioSnatcher
+Self.Parent = AudioSnatcher
+Recent.Parent = AudioSnatcher
+Active.Parent = AudioSnatcher
+
+AudioSnatcher.Parent = CG
+
+Hashes.MouseButton1Click:Connect(function()
+	HashesOnly = not HashesOnly
+	Hashes.Style = (not HashesOnly and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+end)
+
+IDs.MouseButton1Click:Connect(function()
+	IDsOnly = not IDsOnly
+	IDs.Style = (not IDsOnly and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+end)
+
+Self.MouseButton1Click:Connect(function()
+	LogSelf = not LogSelf
+	Self.Style = (not LogSelf and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+end)
+
+Recent.MouseButton1Click:Connect(function()
+	LogRecent = not LogRecent
+	Recent.Style = (not LogRecent and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+end)
+
+Active.MouseButton1Click:Connect(function()
+	IsActive = not IsActive
+	Active.Style = (not IsActive and Enum.ButtonStyle.RobloxRoundButton) or Enum.ButtonStyle.RobloxRoundDefaultButton
+end)
+
+Copy.MouseButton1Click:Connect(function()
+	local Status = pcall(function()
+		Copystring(CompileList())
+	end)
+	
+	if Status then
+		Print("ACHERUS's Audio Snatcher - Successfully copied list.")
+	else
+		if not Copystring then
+			Print("ACHERUS's Audio Snatcher - Clipboard Copying is not available.")
+		else
+			Print("ACHERUS's Audio Snatcher - Failed to copy list.")
+		end
+	end
+end)
+
+local function HookAudio(Sound, Plr)
+	local Info
+	local Id = string.match(Sound.SoundId, "rbxasset://sounds.+") or string.match(Sound.SoundId, "&hash=.+") or string.match(Sound.SoundId, "&0hash=.+") or string.match(Sound.SoundId, "%d+")
+	
+	local IsHash = false
+	if Id and (string.sub(Id, 1, 6) == "&hash=" or string.sub(Id, 1, 7) == "&0hash=") then
+		Id = string.sub(Id, (string.sub(Id, 1, 6) == "&hash=" and 7) or (string.sub(Id, 1, 7) == "&0hash=" and 8), string.len(Id))
+		IsHash = true
+	end
+	
+	local Continue = true
+	for I, V in next, Blacklisted do
+		if Id == tostring(V) then
+			Continue = false
+			break
+		end
+	end
+	
+	if Continue and (LogRecent or (not LogRecent and ((MostRecentAudio[Plr] and MostRecentAudio[Plr] ~= Id) or not MostRecentAudio[Plr]))) then
+		local Product
+		pcall(function()
+			Product = MPS:GetProductInfo(tonumber(Id), Enum.InfoType.Asset)
+		end)
+		
+		if IsHash or (Product and Product.AssetTypeId == 3) then
+			Info = (Product and Product.Name) or (IsHash and "Hashed Audio") or nil
+			MostRecentAudio[Plr] = (Product and Id) or (IsHash and Id) or nil
+		end
+	end
+	
+	if not HookedAudios[Sound] then
+		Sound:GetPropertyChangedSignal("SoundId"):Connect(function()
+			if not IsActive or (not LogSelf and Plr == Players.LocalPlayer) then
+				return
+			end
+			
+			local Info
+			local Id = string.match(Sound.SoundId, "rbxasset://sounds.+") or string.match(Sound.SoundId, "&hash=.+") or string.match(Sound.SoundId, "%d+")
+			
+			local IsHash = false
+			if string.sub(Id, 1, 6) == "&hash=" or string.sub(Id, 1, 7) == "&0hash=" then
+				Id = string.sub(Id, (string.sub(Id, 1, 6) == "&hash=" and 7) or (string.sub(Id, 1, 7) == "&0hash=" and 8), string.len(Id))
+				IsHash = true
+			end
+			
+			local Continue = true
+			for I, V in next, Blacklisted do
+				if Id == tostring(V) then
+					Continue = false
+					break
+				end
+			end
+			
+			local Product
+			if Continue and (LogRecent or (not LogRecent and ((MostRecentAudio[Plr] and MostRecentAudio[Plr] ~= Id) or not MostRecentAudio[Plr]))) then
+				pcall(function()
+					Product = MPS:GetProductInfo(tonumber(Id), Enum.InfoType.Asset)
+				end)
+				
+				if IsHash or (Product and Product.AssetTypeId == 3) then
+					Info = (Product and Product.Name) or (IsHash and Id) or nil
+					MostRecentAudio[Plr] = (Product and Id) or (IsHash and Id) or nil
+				end
+			end
+			
+			if Info then
+				HookedAudios[Sound] = {Id, Plr.Name, (Info or "Error fetching Name")}
+				Print("SoundId was changed.\nSoundId: " .. Id .. "\nPlayer: " .. Plr.Name .. "\nAncestry: " .. Sound:GetFullName() .. "\nName: " .. (Info or "Error fetching Name"))
+			end
+		end)
+	end
+	
+	if IsActive and Info and not HookedAudios[Sound] and (LogSelf or (not LogSelf and Plr ~= Players.LocalPlayer)) and ((IsHash and not IDsOnly and HashesOnly) or (not IsHash and not HashesOnly and IDsOnly) or (HashesOnly and IDsOnly)) then
+		HookedAudios[Sound] = {Id, Plr.Name, (Info or "Error fetching Name")}
+		Print((IsHash and "Snatched Audio (HASH)" or "Snatched Audio") .. "\nSoundId: " .. (Id or "Error fetching Id") .. "\nPlayer: " .. Plr.Name .. "\nAncestry: " .. Sound:GetFullName() .. "\nName: " .. (Info or "Error fetching Name"))
+	end
+end
+
+local function AddPlayer(Plr)
+	local function AddCharacter(Char)
+		delay(.3, function()
+			if not SpecialTools.Enabled then
+				for I, V in next, Char:GetDescendants() do
+					if V:IsA("Sound") and not V:FindFirstChild("CharacterSoundEvent") then
+						pcall(HookAudio, V, Plr)
+					end
+				end
+			else
+				for I, V in next, SpecialTools.Instances do
+					local Object = Char:FindFirstChild(V)
+					if Object then
+						for J, K in next, Object:GetDescendants() do
+							if K:IsA("Sound") and not K:FindFirstChild("CharacterSoundEvent") then
+								pcall(HookAudio, K, Plr)
+							end
+						end
+					end
+				end
+			end
+		end)
+		
+		Char.DescendantAdded:Connect(function(NewObject)
+			if NewObject:IsA("Sound") and not NewObject:FindFirstChild("CharacterSoundEvent") then
+				if not SpecialTools.Enabled then
+					pcall(HookAudio, NewObject, Plr)
+				else
+					for I, V in next, SpecialTools.Instances do
+						local Object = Char:FindFirstChild(V)
+						if Object and NewObject:IsDescendantOf(Object) then
+							pcall(HookAudio, Object, Plr)
+						end
+					end
+				end
+			end
+		end)
+		
+		Char.DescendantRemoving:Connect(function(Object)
+			if HookedAudios[Object] then
+				HookedAudios[Object] = nil
+			end
+		end)
+	end
+	
+	AddCharacter(Plr.Character or Plr.CharacterAdded:Wait())
+	wait(.5)
+	Plr.CharacterAdded:Connect(AddCharacter)
+end
+
+for I, V in next, Players:GetPlayers() do
+	AddPlayer(V)
+end
+
+Players.PlayerAdded:Connect(AddPlayer)
