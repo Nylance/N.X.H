@@ -1,3 +1,3 @@
 # N.X.H
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/XenonCompService/main/ProximityLoader"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/N.X.H/main/ProximityLoader"))()
