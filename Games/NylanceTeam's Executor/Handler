@@ -32,3 +32,7 @@ Section:NewButton("V.G Hub", "Loads V.G Hub", function()
 		loadstring(game:HttpGet(v))()
 	end
 end)
+
+Section:NewButton("Audio Logger", "Loads a working Audio Logger", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/XenonCompService/main/Universal/AudioLogger"))()
+end)
