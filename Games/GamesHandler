@@ -1,4 +1,4 @@
 getgenv().Games = {
     [920587237] = "https://raw.githubusercontent.com/1201for/V.G-hub-Part-Two/main/Ad", --DOORS
-    [11245196207] = "https://raw.githubusercontent.com/1201for/V.G-Hub/main/Games/Arsenal" --NylanceTeam's Toolbox
+    [11245196207] = "https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/NylanceTeam's%20Executor/Handler" --NylanceTeam's Toolbox
 }
