@@ -36,7 +36,7 @@ G.MessageOut = LogService.MessageOut
 G.Kick = Player.Kick
 G.Idled = Player.Idled 
 
-local Name = "N.X.H"..game.PlaceId..".proximity-config"..".json"
+local Name = "N.X.H.savedata."..game.PlaceId..".proximity-data"..".json"
 local Des = {}
 if makefolder and not isfile("N.X.H") then
 	makefolder("N.X.H")
