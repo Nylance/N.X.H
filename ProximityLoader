@@ -2,9 +2,9 @@ repeat
 	task.wait()
 until game:IsLoaded()
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/XenonCompService/main/Security/Handler"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/N.X.H/main/Security/Handler"))()
 
-local A = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/GamesHandler"))()
+local A = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/N.X.H/main/Games/GamesHandler"))()
 getgenv().Get = setmetatable({},{
 	__index = function(A, B)
 		return game:GetService(B)
@@ -13,7 +13,7 @@ getgenv().Get = setmetatable({},{
 
 local queue_on_teleport = queue_on_teleport or syn and syn.queue_on_teleport [[
        repeat task.wait() until game:IsLoaded() task.wait(5)
-       loadstring(game:HttpGet('https://raw.githubusercontent.com/Nylance/XenonCompService/main/ProximityLoader'))()]]
+       loadstring(game:HttpGet('https://raw.githubusercontent.com/Nylance/N.X.H/main/ProximityLoader'))()]]
 
 for i, v in pairs(NXHGames) do
 	if i == game.PlaceId then
