@@ -1,0 +1,40 @@
+local DoorsTab = Window:CreateTab("Doors", 4483362458)
+local Section = DoorsTab:CreateSection("Doors Section")
+
+local Button = DoorsTab:CreateButton({
+	Name = "Vynixius Hub",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Script.lua"))()
+	end,
+})
+
+local Button = DoorsTab:CreateButton({
+	Name = "Plamen6789 [NORMAL]",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/plamen6789/UtilitiesHub/main/UtilitiesGUI"))()
+	end,
+})
+
+local Button = DoorsTab:CreateButton({
+	Name = "Plamen6789 [HARD]",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/HardcoreScriptDOORS/main/HardcoreModeScript'))()
+	end,
+})
+
+local Button = DoorsTab:CreateButton({
+	Name = "Darkrai-X Hub",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Doors"))()
+	end,
+})
+
+local TheRoomsTab = Window:CreateTab("The Rooms", 4483362458)
+local Section = TheRoomsTab:CreateSection("Rooms Section")
+
+local Button = TheRoomsTab:CreateButton({
+	Name = "Automatic A-1000 Bot",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/Doors/RoomsThing"))()
+	end,
+})
