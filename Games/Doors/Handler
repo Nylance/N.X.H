@@ -75,15 +75,6 @@ else
     Label2 = HomeTab:CreateLabel("You're using: [UNKNOWN EXPLOIT]")
 end
 
-local Dropdown = HomeTab:CreateDropdown({
-	Name = "This does nothing",
-	Options = {"VGhpcyBkb2VzIG5vdGhpbmc=","SWNoIGxpZWJlIGRpY2ggVGFpc2lh"},
-	CurrentOption = "VGhpcyBkb2VzIG5vdGhpbmc=",
-	Flag = "NoDropdown",
-	Callback = function(Option)
-	end,
-})
-
 local Button = UniversalTab:CreateButton({
 	Name = "Infinite Yield",
 	Callback = function()
@@ -150,3 +141,5 @@ local Button = SettingsTab:CreateButton({
 		Rayfield:Destroy()
 	end,
 })
+
+local Label1 = SettingsTab:CreateLabel("Nylance Utilities© 2020 - 2023")
