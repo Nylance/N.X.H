@@ -1,5 +1,5 @@
 getgenv().Games = {
     [920587237] = "https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/Doors/Handler", --DOORS
     [6839171747] = "https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/Doors/Handler", --THE ROOMS
-    [11245196207] = "https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/NylanceTeam's%20Executor/Handler" --NylanceTeam's Toolbox
+    [11245196207] = "https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/test?token=GHSAT0AAAAAACA3CIMLWJ3XWB76EYYONVLKZBTBACQ" --"https://raw.githubusercontent.com/Nylance/XenonCompService/main/Games/NylanceTeam's%20Executor/Handler" --NylanceTeam's Toolbox
 }
