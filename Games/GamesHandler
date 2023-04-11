@@ -1,6 +1,6 @@
 getgenv().NXHGames = {
+    [2809202155] = "https://raw.githubusercontent.com/Nylance/N.X.H/main/Games/YourBizzareAdventure/Handler", --YourBizzareAdventure
     [920587237] = "https://raw.githubusercontent.com/Nylance/N.X.H/main/Games/Doors/Handler", --DOORS
     [6839171747] = "https://raw.githubusercontent.com/Nylance/N.X.H/main/Games/Doors/Handler", --THE ROOMS
     [11245196207] = "https://raw.githubusercontent.com/Nylance/N.X.H/main/Games/NylanceTeam's%20Toolbox/Handler", --NylanceTeam's Toolbox
-    [2809202155] = "https://raw.githubusercontent.com/Nylance/N.X.H/main/Games/YourBizzareAdventure/Handler" --YourBizzareAdventure
 }
