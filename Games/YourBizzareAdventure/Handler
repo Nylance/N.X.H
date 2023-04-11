@@ -98,14 +98,14 @@ local Button3 = UniversalTab:CreateButton({
 	end,
 })
 
-local Button = DoorsTab:CreateButton({
+local Button = YBATab:CreateButton({
 	Name = "CuHub [Requires Key]",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/ItachiPvPUchiha/CuHub/main/yba.lua"))()
 	end,
 })
 
-local Button = DoorsTab:CreateButton({
+local Button = YBATab:CreateButton({
 	Name = "GUI by DEATH",
 	Callback = function()
 		_G.Options = {
@@ -115,7 +115,7 @@ local Button = DoorsTab:CreateButton({
 	end,
 })
 
-local Button = DoorsTab:CreateButton({
+local Button = YBATab:CreateButton({
 	Name = "Bitch Boy V3",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/zakater5/LuaRepo/main/YBA/v3.lua"))()
