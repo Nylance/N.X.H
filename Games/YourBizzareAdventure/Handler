@@ -121,7 +121,7 @@ local Button = DoorsTab:CreateButton({
 })
 
 local Button = DoorsTab:CreateButton({
-	Name = "Beach Boy V3,
+	Name = "Beach Boy V3",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/zakater5/LuaRepo/main/YBA/v3.lua"))()
 	end,
