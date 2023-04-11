@@ -16,7 +16,7 @@ local themes = {
 }
 
 local page = venyx:addPage("Universal", 5012544693)
-local section1 = page:addSection("Section 1")
+local section1 = page:addSection("Multipurpose")
 
 section1:addButton(
     "Audio Logger",
@@ -215,10 +215,10 @@ Miscsection:addSlider(
 	0,
 	200,
 	function(v)
-		if LocalPlayer.Character:FindFirstChildOfClass('Humanoid').UseJumpPower then
-			LocalPlayer.Character:FindFirstChildOfClass('Humanoid').JumpPower = jpower
+		if LocalPlayer.Character:FindFirstChildOfClass("Humanoid").UseJumpPower then
+			LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = v
 		else
-			LocalPlayer.Character:FindFirstChildOfClass('Humanoid').JumpHeight  = jpower
+			LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpHeight  = v
 		end
 	end
 )
