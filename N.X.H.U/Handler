@@ -1,0 +1,359 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/GreenDeno/Venyx-UI-Library/main/source.lua"))()
+local venyx = library.new("N.X.H - Universal", 5013109572)
+
+local IsSynThen = false
+local PlayerService = game:GetService("Players")
+local LocalPlayer = PlayerService.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+local themes = {
+    Background = Color3.fromRGB(24, 24, 24),
+    Glow = Color3.fromRGB(0, 0, 0),
+    Accent = Color3.fromRGB(10, 10, 10),
+    LightContrast = Color3.fromRGB(20, 20, 20),
+    DarkContrast = Color3.fromRGB(14, 14, 14),
+    TextColor = Color3.fromRGB(255, 255, 255)
+}
+
+local page = venyx:addPage("Universal", 5012544693)
+local section1 = page:addSection("Section 1")
+
+section1:addButton(
+    "Audio Logger",
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/N.X.H/main/Universal/AudioLogger"))()
+    end
+)
+
+section1:addButton(
+    "Stream Sniper",
+    function()
+		if IsSynThen then
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/N.X.H/main/Universal/StreamSniper"))()
+		else
+			loadstring(game:HttpGet(('https://pastebin.com/raw/sT56AM8k'),true))()
+		end
+    end
+)
+
+-- first page
+local HubsPage = venyx:addPage("Hubs", 5012544693)
+local HubsSection = HubsPage:addSection("Universal Game Hubs")
+
+HubsSection:addButton(
+    "NukeVsCity Hub",
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/TheALLHACKLoader/main/NukeLoader"))()
+    end
+)
+
+HubsSection:addButton(
+    "V.G Hub",
+    function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
+    end
+)
+
+HubsSection:addButton(
+    "Owl Hub",
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/CriShoux/OwlHub/master/OwlHub.txt"))();
+    end
+)
+
+HubsSection:addButton(
+    "T0PK3K 4.0",
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ChaosityYT/GameScripts/master/T0PK3K%204.0.txt"))();
+    end
+)
+
+HubsSection:addButton(
+	"N.X.H Hub",
+	function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Nylance/N.X.H/main/ProximityLoader"))()
+	end
+)
+
+local AdminsPage = venyx:addPage("Admins", 5012544693)
+local AdminsSection = AdminsPage:addSection("Universal Admins")
+
+AdminsSection:addButton(
+    "Infinite Yield",
+    function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end
+)
+
+AdminsSection:addButton(
+    "CMD-X",
+    function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/HFkyyd1H",true))()
+    end
+)
+
+-- first page
+local ScriptsPage = venyx:addPage("Debugging", 5012544693)
+local ScriptsSection = ScriptsPage:addSection("Debugging Suites")
+
+ScriptsSection:addButton(
+    "DEX - Ultimate Debugging Suite",
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+    end
+)
+
+ScriptsSection:addButton(
+    "Old DEX",
+    function()
+        local getobjects = function(a)
+			local Objects = {}
+			if a then
+				local b = InsertService:LoadLocalAsset(a)
+				if b then 
+					table.insert(Objects, b) 
+				end
+			end
+			return Objects
+		end
+	
+		local Dex = getobjects("rbxassetid://10055842438")[1]
+		Dex.Parent = PARENT
+	
+		local function Load(Obj, Url)
+			local function GiveOwnGlobals(Func, Script)
+				local Fenv, RealFenv, FenvMt = {}, {
+					script = Script,
+					getupvalue = function(a, b)
+						return nil
+					end,
+					getreg = function()
+						return {}
+					end,
+					getprops = getprops or function(inst)
+						if getproperties then
+							local props = getproperties(inst)
+							if props[1] and gethiddenproperty then
+								local results = {}
+								for _,name in pairs(props) do
+									local success, res = pcall(gethiddenproperty, inst, name)
+									if success then
+										results[name] = res
+									end
+								end
+								
+								return results
+							end
+							
+							return props
+						end
+						
+						return {}
+					end
+				}, {}
+				FenvMt.__index = function(a,b)
+					return RealFenv[b] == nil and getgenv()[b] or RealFenv[b]
+				end
+				FenvMt.__newindex = function(a, b, c)
+					if RealFenv[b] == nil then 
+						getgenv()[b] = c 
+					else 
+						RealFenv[b] = c 
+					end
+				end
+				setmetatable(Fenv, FenvMt)
+				pcall(setfenv, Func, Fenv)
+				return Func
+			end
+	
+			local function LoadScripts(_, Script)
+				if Script:IsA("LocalScript") then
+					task.spawn(function()
+						GiveOwnGlobals(loadstring(Script.Source,"="..Script:GetFullName()), Script)()
+					end)
+				end
+				table.foreach(Script:GetChildren(), LoadScripts)
+			end
+						
+			LoadScripts(nil, Obj)
+		end
+	
+		Load(Dex)
+    end
+)
+
+ScriptsSection:addButton(
+    "Script Viewer",
+    function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/dva01xpE"))()
+    end
+)
+
+ScriptsSection:addButton(
+    "SimpleSpy",
+    function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+    end
+)
+
+local Misc = venyx:addPage("Misc", 5012544693)
+local Miscsection = Misc:addSection("Universal Client")
+
+Miscsection:addSlider(
+	"Walkspeed",
+	16,
+	0,
+	200,
+	function(v)
+		LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = v
+	end
+)
+
+Miscsection:addSlider(
+	"Jumppower",
+	50,
+	0,
+	200,
+	function(v)
+		if LocalPlayer.Character:FindFirstChildOfClass('Humanoid').UseJumpPower then
+			LocalPlayer.Character:FindFirstChildOfClass('Humanoid').JumpPower = jpower
+		else
+			LocalPlayer.Character:FindFirstChildOfClass('Humanoid').JumpHeight  = jpower
+		end
+	end
+)
+
+Miscsection:addTextbox(
+	"Teleport",
+	"Username",
+	function(v)
+		local ExpectedPlayer = PlayerService:FindFirstChild(v)
+		local BeenASecond, V3 = false, Vector3.new(0, 0, 0)
+		for i,v in pairs(ExpectedPlayer) do
+			if Players[v].Character ~= nil then
+				if LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and LocalPlayer.Character:FindFirstChildOfClass("Humanoid").SeatPart then
+					LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Sit = false
+					task.wait(0.1)
+				end
+				local getRoot = function(v)
+					return v:FindFirstChildOfClass("HumanoidRootPart")
+				end
+				getRoot(LocalPlayer.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)
+			end
+		end
+		task.delay(1, function()
+			BeenASecond = true
+		end)
+		while not BeenASecond do
+			for i, v in ipairs(LocalPlayer.Character:GetDescendants()) do
+				if v.IsA(v, "BasePart") then
+					v.Velocity, v.RotVelocity = V3, V3
+				end
+			end
+			task.wait()
+		end
+	end
+)
+
+Miscsection:addButton(
+    "Refresh Animations",
+    function()
+		local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+		local Humanoid = Character and Character:WaitForChild("Humanoid", 15)
+		local Animate = Character and Character:WaitForChild("Animate", 15)
+		if not Humanoid or not Animate then
+			return venyx:Notify("N.X.H","Failed refreshing Animations")
+		end
+		Animate.Disabled = true
+		for i, v in ipairs(Humanoid:GetPlayingAnimationTracks()) do
+			v:Stop()
+		end
+		Animate.Disabled = false
+    end
+)
+
+Miscsection:addButton(
+	"TpTool",
+	function()
+		if LocalPlayer.Backpack:FindFirstChild("Teleport Tool") then
+			return
+		else
+			local TpTool = Instance.new("Tool")
+			TpTool.Name = "Teleport Tool"
+			TpTool.RequiresHandle = false
+			TpTool.Parent = LocalPlayer.Backpack
+			TpTool.Activated:Connect(function()
+				local Character = LocalPlayer.Character or workspace:FindFirstChild(LocalPlayer.Name)
+				local HumanoidRootPart = Character and Character:FindFirstChild("HumanoidRootPart")
+				if not Character or not HumanoidRootPart then
+					return venyx:Notify("N.X.H","Failed to find HumanoidRootPart")
+				end
+				HumanoidRootPart.CFrame = CFrame.new(Mouse.Hit.X, Mouse.Hit.Y + 3, Mouse.Hit.Z, select(4, HumanoidRootPart.CFrame:components()))
+			end)
+		end
+	end
+)
+
+local settings = venyx:addPage("Settings", 5012544693)
+local colors = settings:addSection("Colors")
+local SetSection = settings:addSection("Settings")
+
+for theme, color in pairs(themes) do
+    colors:addColorPicker(theme, color,
+        function(color3)
+            venyx:setTheme(theme, color3)
+        end
+	)
+end
+
+SetSection:addKeybind(
+    "Toggle Keybind",
+    Enum.KeyCode.RightBracket,
+    function()
+        venyx:toggle()
+    end
+)
+
+SetSection:addButton(
+    "Notify Ping",
+    function()
+		venyx:Notify("N.X.H",math.round(LocalPlayer:GetNetworkPing() * 1000) .. "ms")
+    end
+)
+
+venyx:SelectPage(venyx.pages[1], true)
+
+venyx:Notify("N.X.H","has successfully loaded.")
+
+task.wait(3)
+
+if (syn and syn.protect_gui and not is_sirhurt_closure and not pebc_execute and "Synapse") then
+    venyx:Notify("N.X.H","You're using: SynapseX")
+	IsSynThen = true
+elseif PROTOSMASHER_LOADED or (pebc_execute and "ProtoSmasher") then
+    venyx:Notify("N.X.H","You're using: ProtoSmasher")
+elseif ScriptWare then
+    venyx:Notify("N.X.H","You're using: ScriptWare")
+elseif (secure_load and "Sentinel") then
+    venyx:Notify("N.X.H","You're using: Sentinel")
+elseif (is_sirhurt_closure and "Sirhurt") then
+    venyx:Notify("N.X.H","You're using: Sirhurt")
+elseif (KRNL_LOADED and "Krnl") then
+    venyx:Notify("N.X.H","You're using: KRNL")
+elseif (isvm and "Proxo") then
+    venyx:Notify("N.X.H","You're using: Proxo")
+elseif (shadow_env and "Shadow") then
+    venyx:Notify("N.X.H","You're using: Shadow")
+elseif (jit and "EasyExploits") then
+    venyx:Notify("N.X.H","You're using: EasyExploits")
+elseif (getscriptenvs and "Calamari") then
+    venyx:Notify("N.X.H","You're using: Calamari")
+elseif (unit and not syn and "Unit") then
+    venyx:Notify("N.X.H","You're using: Unit")
+elseif (OXYGEN_LOADED and "Oxygen U") then
+    venyx:Notify("N.X.H","You're using: Oxygen U")
+elseif (IsElectron and "Electron") then
+    venyx:Notify("N.X.H","You're using: Electron")
+else
+    venyx:Notify("N.X.H","You're using: [UNKNOWN EXPLOIT]")
+end
