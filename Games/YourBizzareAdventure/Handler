@@ -104,32 +104,28 @@ local Button3 = UniversalTab:CreateButton({
 })
 
 local Button = DoorsTab:CreateButton({
-	Name = "Vynixius Hub",
+	Name = "CuHub",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Script.lua"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/ItachiPvPUchiha/CuHub/main/yba.lua"))()
 	end,
 })
 
 local Button = DoorsTab:CreateButton({
-	Name = "Plamen6789 [NORMAL]",
+	Name = "GUI by DEATH",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/plamen6789/UtilitiesHub/main/UtilitiesGUI"))()
+		_G.Options = {
+			["ToggleKey"] = "Delete",
+		}
+		loadstring(game:HttpGet(("https://raw.githubusercontent.com/VoidGaster/Scripts/main/" .. tostring(game.PlaceId)),true))()
 	end,
 })
-
-local Label1 = DoorsTab:CreateLabel("Note to Plamen6789: This terminates N.X.H")
 
 local Button = DoorsTab:CreateButton({
-	Name = "Darkrai-X Hub",
+	Name = "Beach Boy V3,
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Doors"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/zakater5/LuaRepo/main/YBA/v3.lua"))()
 	end,
 })
-
-_G.Options = {
-    ["ToggleKey"] = "Delete",
-}
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/VoidGaster/Scripts/main/" .. tostring(game.PlaceId)),true))()
 
 local Button = SettingsTab:CreateButton({
 	Name = "Destroy N.X.H",
