@@ -29,18 +29,13 @@ local Window = Rayfield:CreateWindow({
 
 local HomeTab = Window:CreateTab("Home", 4483362458)
 local UniversalTab = Window:CreateTab("Universal", 4483362458) 
-local DoorsTab = Window:CreateTab("Doors", 4483362458)
-local TheRoomsTab = Window:CreateTab("The Rooms", 4483362458)
+local YBATab = Window:CreateTab("YBA", 4483362458)
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
 
 local Section = HomeTab:CreateSection("Home Section")
 local Section = UniversalTab:CreateSection("Universal Section")
-local Section = DoorsTab:CreateSection("Doors Section")
-local Section = TheRoomsTab:CreateSection("Rooms Section")
+local Section = YBATab:CreateSection("Your Bizarre Adventure Section")
 local Section = SettingsTab:CreateSection("Settings Section")
-
-local Label1 = DoorsTab:CreateLabel("Make sure you're inside a active game!")
-local Label1 = TheRoomsTab:CreateLabel("Make sure you're inside a active game!")
 
 local Label1 = HomeTab:CreateLabel("Welcome, "..game:GetService("Players").LocalPlayer.Name)
 local Label2 = nil
@@ -104,7 +99,7 @@ local Button3 = UniversalTab:CreateButton({
 })
 
 local Button = DoorsTab:CreateButton({
-	Name = "CuHub",
+	Name = "CuHub [Requires Key]",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/ItachiPvPUchiha/CuHub/main/yba.lua"))()
 	end,
@@ -121,7 +116,7 @@ local Button = DoorsTab:CreateButton({
 })
 
 local Button = DoorsTab:CreateButton({
-	Name = "Beach Boy V3",
+	Name = "Bitch Boy V3",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/zakater5/LuaRepo/main/YBA/v3.lua"))()
 	end,
