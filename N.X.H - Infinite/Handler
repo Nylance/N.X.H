@@ -5,5 +5,5 @@ until game:IsLoaded()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 
 local queue_on_teleport = queue_on_teleport or syn and syn.queue_on_teleport [[
-       repeat task.wait() until game:IsLoaded() task.wait(5)
+       repeat task.wait() until game:IsLoaded() task.wait(3)
        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()]]
